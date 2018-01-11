@@ -20,8 +20,10 @@ function referencePixel(xy, limit, threshold) {
   return returnValue;
 }
 
-gd.openJpeg('./image8.jpg', (error, image) => {
-  console.log(error, image);
+gd.openJpeg('./src/image8.jpg', (error, image) => {
+  if (error) {
+    throw error;
+  }
 
   let result = gd.createTrueColorSync(image.width, image.height);
 
@@ -49,7 +51,7 @@ gd.openJpeg('./image8.jpg', (error, image) => {
     }
   }
 
-  result.saveJpeg(`./test${Date.now()}.jpg`, 100, (error) => {
+  result.saveJpeg(`./tmp/test${Date.now()}.jpg`, 100, (error) => {
     if (error) {
       console.log(error);
     }
