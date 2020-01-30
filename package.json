@@ -10,6 +10,6 @@
   "author": "Vincent Bruijn <vebruijn@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "node-gd": "^1.5.0"
+    "node-gd": "2.0.0"
   }
 }
