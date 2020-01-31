@@ -41,13 +41,9 @@ function referencePixel(xy, limit, threshold) {
  * @returns {Promise<Object>} The image that has been opened
  */
 async function openJpeg(fileName) {
-  return await new Promise((resolve, reject) => {
-    gd.openJpeg(fileName, (error, image) => {
-      if (error) {
-        return reject(error);
-      }
-      resolve(image);
-    });
+  return await new Promise(async (resolve, reject) => {
+    const image = await gd.openJpeg(fileName);
+    resolve(image);
   }).catch(reason => {
     throw new Error(reason);
   });
@@ -61,13 +57,13 @@ async function openJpeg(fileName) {
  * @returns {Promise<boolean>} true when save was succesful
  */
 async function saveJpeg(filePath, quality, imageData) {
-  return await new Promise((resolve, reject) => {
-    imageData.saveJpeg(filePath, quality, (error) => {
-      if (error) {
-        return reject(error);
-      }
+  return await new Promise(async (resolve, reject) => {
+    const success = await imageData.saveJpeg(filePath, quality);
+    if (success) {
       resolve(true);
-    });
+    } else {
+      reject(false);
+    }
   }).catch(reason => {
     throw new Error(reason);
   });
